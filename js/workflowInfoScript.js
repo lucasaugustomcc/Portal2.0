@@ -466,7 +466,7 @@ $('#accordion').on('hidden.bs.collapse', toggleChevron);
 $('#accordion').on('shown.bs.collapse', toggleChevron);
 
 
-$(document).on('click', '#compare', function () {
+$(document).on('click', 'div#compare-data button', function () {
 	var arrayArg = [];
 	$variables = $('div.variable a#DownloadImage-variable-link').each(function(){
 		var variableName = $(this).parent().attr("id");
@@ -485,5 +485,18 @@ $(document).on('click', '#compare', function () {
 
 	var jsonArray = JSON.stringify(arrayArg);
 
-	window.open("http://localhost?data="+encodeURIComponent(jsonArray));
+	window.open("https://yjy0625.github.io/workflow-visualization/compare-datasets/?data="+encodeURIComponent(jsonArray));
+});
+
+$(document).on('click', 'button#Visualize-variable-link', function () {
+	
+	var url = $(this).siblings('a#DownloadImage-variable-link').attr("href");
+	var name = $(this).parent().attr("id");
+	if (url != null && name != null)
+	{			
+  		console.log(url);
+  		console.log(name);
+		window.open("https://yjy0625.github.io/workflow-visualization/visualize-result/?url="+encodeURIComponent(url)+"&name="+encodeURIComponent(name));
+	}		
+
 });
