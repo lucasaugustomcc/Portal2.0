@@ -160,6 +160,7 @@ function addProcessInfo(processURI, inputsArray, outputsArray) {
 
 		if ($("ul.nav li.active").index() == 0) {
 			$($newPanel.find("#DownloadImage-variable-link")).hide();
+			$($newPanel.find("#Visualize-variable-link")).hide();
 		}
 		else {
 			var code = 'select ?software from <urn:x-arq:UnionGraph> where {<'
@@ -282,6 +283,7 @@ function addVariableInfo(variableURI, usedBy, generatedBy, variableType, artifac
 		if ($("ul.nav li.active").index() == 0) {
 			variableValue.setAttribute("style", "display:none");
 			$($newPanel.find("#DownloadImage-variable-link")).hide();
+			$($newPanel.find("#Visualize-variable-link")).hide();
 		}
 		else {
 				if(artifactValues.bindings[0]!=null)  {
@@ -289,6 +291,7 @@ function addVariableInfo(variableURI, usedBy, generatedBy, variableType, artifac
 				}
 				else  {
 					$($newPanel.find("#DownloadImage-variable-link")).hide();
+					$($newPanel.find("#Visualize-variable-link")).hide();
 				}
 				//console.log(variablehasvalue);
 				if(typeof variablehasvalue.bindings!='undefined')  {
@@ -462,3 +465,25 @@ function toggleChevron(e) {
 $('#accordion').on('hidden.bs.collapse', toggleChevron);
 $('#accordion').on('shown.bs.collapse', toggleChevron);
 
+
+$(document).on('click', '#compare', function () {
+	var arrayArg = [];
+	$variables = $('div.variable a#DownloadImage-variable-link').each(function(){
+		var variableName = $(this).parent().attr("id");
+		var url = $(this).attr('href');
+		if (variableName != null && url != null)
+		{			
+	  		console.log(variableName);
+	  		console.log(url);
+
+	  		metadata = new Object();
+	  		metadata.url = url;
+	  		metadata.name = variableName;
+	  		arrayArg.push(metadata);
+		}		
+	});
+
+	var jsonArray = JSON.stringify(arrayArg);
+
+	window.open("http://localhost?data="+encodeURIComponent(jsonArray));
+});
