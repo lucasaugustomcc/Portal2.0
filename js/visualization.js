@@ -271,6 +271,7 @@ var translateVisualization = function() {
 
 var addTraces = function(traces) {
     var select = document.getElementById("selection");
+    var execution = document.getElementById("execution_select");
 
     //var first = document.createElement("option");
     
@@ -285,6 +286,13 @@ var addTraces = function(traces) {
         el.textContent = stripNameFromURI(opt.execution.value);
         el.value = opt.execution.value;
         select.appendChild(el);
+        if (i == 0)
+        {
+            execution.appendChild(el);
+            console.log(el);
+        }
+        
+        executions_id[el.textContent] = opt.execution.value;
     }
     
     select.addEventListener('change', function() {
@@ -293,6 +301,7 @@ var addTraces = function(traces) {
         {
             return;
         }*/
+        selected_execution_id = select.options[select.selectedIndex].text;
         document.getElementById('execution-name').innerHTML = "Selected execution: " + select.options[select.selectedIndex].text;
         localStorage.setItem('workflow-uri', select.options[select.selectedIndex].value);
         getExecutionData(select.options[select.selectedIndex].value, function(res, executionID) {
@@ -355,6 +364,7 @@ var unhighlightPuts = function(putsArray) {
 var setupNodeOnClick = function (svg, vis) {
     //setup on click listeners for every node
     svg.selectAll('g.node').on('click', function(id) {
+        console.log("id "+id);
         var node = vis.node(id);
         
         svg.selectAll('g.node ellipse').each(function() {

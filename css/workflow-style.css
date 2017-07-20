@@ -345,7 +345,7 @@ table {
 	margin-left: 16px;
 }
 
-#RDFImage-link1, #RDFImage-link2, #DownloadTemplate-link, #RDFImage-variable-link, #DownloadImage-variable-link, #Visualize-variable-link {
+#RDFImage-link1, #RDFImage-link2, #DownloadTemplate-link, #RDFImage-variable-link, #DownloadImage-variable-link, #Visualize-variable-link, #Compare-variable-link {
     float: left;
     position: relative;
 }
@@ -378,7 +378,7 @@ table {
     color: #0ea6f3;
 }
 
-#RDFLink1, #RDFLink2, #RDFVariableLink, #DownloadLink, #VisualizeLink, #DownloadTemplateLink {
+#RDFLink1, #RDFLink2, #RDFVariableLink, #DownloadLink, #VisualizeLink, #CompareLink, #DownloadTemplateLink {
     display: none;
     width: 120px;
     background-color: #8FBC8F;
@@ -393,7 +393,7 @@ table {
     margin-left: -60px;
 }
 
-#RDFLink1::after, #RDFLink2::after, #RDFVariableLink::after, #DownloadLink::after, #VisualizeLink, #DownloadTemplateLink::after {
+#RDFLink1::after, #RDFLink2::after, #RDFVariableLink::after, #DownloadLink::after, #VisualizeLink, #CompareLink, #DownloadTemplateLink::after {
     content: " ";
     position: absolute;
     bottom: 100%; /* At the top of the tooltip */
