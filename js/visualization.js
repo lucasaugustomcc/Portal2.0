@@ -271,7 +271,6 @@ var translateVisualization = function() {
 
 var addTraces = function(traces) {
     var select = document.getElementById("selection");
-    var execution = document.getElementById("execution_select");
 
     //var first = document.createElement("option");
     
@@ -285,15 +284,11 @@ var addTraces = function(traces) {
         var el = document.createElement("option");
         el.textContent = stripNameFromURI(opt.execution.value);
         el.value = opt.execution.value;
-        select.appendChild(el);
-        if (i == 0)
-        {
-            execution.appendChild(el);
-            console.log(el);
-        }
-        
-        executions_id[el.textContent] = opt.execution.value;
+        select.appendChild(el);        
     }
+
+    var $options = $("#selection > option").clone().slice(1);
+    $('#execution_select').append($options);
     
     select.addEventListener('change', function() {
         //if selected index is the string 'Select execution trace'

@@ -515,9 +515,9 @@ $(document).on('click', 'button#Compare-variable-link', function ()
   		metadata = new Object();
   		metadata.url = url;
   		metadata.name = variableName;
-  		metadata.execution_id = executions_id[0];
+  		metadata.execution_id = $("#selection").val();
   		arrayArg.push(metadata);
-  		var variable2URI;
+  		
 
 		// fetch data URL
 		var code = 'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>'
@@ -529,21 +529,25 @@ $(document).on('click', 'button#Compare-variable-link', function ()
 				+ '?variable2URI <http://www.opmw.org/ontology/hasLocation> ?location }';
 		var codeURI = endpoint + 'query?query=' + escape(code) + '&format=json'; 
 		$.get(codeURI, function(data,status)  {
-			//console.log(data);
-			variable2URI = data.results.bindings[0].location.value;
+			console.log(data);
+			var variable2URI = data.results.bindings[0].location.value;
 			console.log(variable2URI);
-		});  	
 
-  		metadata2 = new Object();
-  		metadata2.url = variable2URI;
-  		metadata2.name = variableName;
-  		metadata2.execution_id = $("#execution_select").val();
-  		arrayArg.push(metadata2);
+			metadata2 = new Object();
+	  		metadata2.url = variable2URI;
+	  		metadata2.name = variableName;
+	  		metadata2.execution_id = $("#execution_select").val();
 
-  		var jsonArray = JSON.stringify(arrayArg);
+	  		console.log(metadata2);
+	  		arrayArg.push(metadata2);
 
-		window.open("https://yjy0625.github.io/workflow-visualization/compare-datasets/?data="+encodeURIComponent(jsonArray));
+	  		var jsonArray = JSON.stringify(arrayArg);
 
+	  		console.log(arrayArg);
+
+			window.open("https://yjy0625.github.io/workflow-visualization/compare-datasets/?data="+encodeURIComponent(jsonArray));
+
+		});  	  	  	
 	}		
 });
 
